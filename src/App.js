@@ -1,4 +1,4 @@
-import React, { useReducer } from "react";
+import React, { useReducer, createContext, useContext, Children } from "react";
 import "./App.css";
 
 const initialState = {
@@ -22,8 +22,18 @@ const reducer = (state, action) => {
   }
 };
 
-const Counter = () => {
+const CounterContext = createContext();
+const CounterProvider = ({ children }) => {
   const [state, dispatch] = useReducer(reducer, initialState);
+  return (
+    <CounterContext.Provider value={{ state, dispatch }}>
+      {children}
+    </CounterContext.Provider>
+  );
+};
+
+const Counter = () => {
+  const { state, dispatch } = useContext(CounterContext);
   return (
     <div className="counter-container">
       <h1>{state.count}</h1>
@@ -43,14 +53,28 @@ const Counter = () => {
   );
 };
 
+const Counter2 = () => {
+  const { state, dispatch } = useContext(CounterContext);
+  return (
+    <>
+      <h1 className="counter1">Counter 1 Component {state.count}</h1>
+      <button onClick={() => dispatch({ type: "INCREMENT" })}>Increment</button>
+      <button onClick={() => dispatch({ type: "DECREMENT" })}>Decrement</button>
+    </>
+  );
+};
+
 const App = () => {
   return (
     <div className="app-container">
       <h1 className="title">React Counter</h1>
       <p className="sub-description">
-        A simple counter application using Context API
+        A simple counter application using Use reducer and context api
       </p>
-      <Counter />
+      <CounterProvider>
+        <Counter2 />
+        <Counter />
+      </CounterProvider>
     </div>
   );
 };
