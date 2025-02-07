@@ -1,37 +1,42 @@
-import React, { createContext, useContext, useState } from "react";
+import React, { useReducer } from "react";
 import "./App.css";
-//Create a context to hold the count state and updater function
-const CountContext = createContext();
 
-function CountProvider({ children }) {
-  const [count, setCount] = useState(0);
-  //Function to increment the count
-  const increment = () => setCount(count + 1);
-  //Function to decrement the count
-  const decrement = () => setCount(count - 1);
+const initialState = {
+  count: 0,
+};
 
-  return (
-    <CountContext.Provider value={{ count, increment, decrement }}>
-      {children}
-    </CountContext.Provider>
-  );
-}
-
-function useCount() {
-  const context = useContext(CountContext);
-  return context;
-}
+//Define the reducer function to handle state transitions
+const reducer = (state, action) => {
+  if (action.type === "INCREMENT") {
+    return {
+      ...state,
+      count: state.count + 1,
+    };
+  } else if (action.type === "DECREMENT") {
+    return {
+      ...state,
+      count: state.count - 1,
+    };
+  } else {
+    return state;
+  }
+};
 
 const Counter = () => {
-  const { count, increment, decrement } = useCount();
-
+  const [state, dispatch] = useReducer(reducer, initialState);
   return (
     <div className="counter-container">
-      <h1>{count}</h1>
-      <button className="button" onClick={increment}>
+      <h1>{state.count}</h1>
+      <button
+        className="button"
+        onClick={() => dispatch({ type: "INCREMENT" })}
+      >
         +
       </button>
-      <button className="button" onClick={decrement}>
+      <button
+        className="button"
+        onClick={() => dispatch({ type: "DECREMENT" })}
+      >
         -
       </button>
     </div>
@@ -45,9 +50,7 @@ const App = () => {
       <p className="sub-description">
         A simple counter application using Context API
       </p>
-      <CountProvider>
-        <Counter />
-      </CountProvider>
+      <Counter />
     </div>
   );
 };
