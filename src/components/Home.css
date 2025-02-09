@@ -15,7 +15,7 @@ body {
 
 .home-container {
   max-width: 800px;
-  margin: 80px auto; /* Adds space for navbar and centers horizontally */
+  margin: 80px auto; /* Centers the container */
   padding: 40px;
   background-color: black;
   border-radius: 10px; /* Slightly rounded corners for a modern look */
@@ -24,11 +24,6 @@ body {
     /* Medium glow */ 0 0 30px rgba(255, 255, 255, 0.1); /* Subtle deep glow */
   border: 1px solid rgba(255, 255, 255, 0.2); /* Subtle border */
   font-family: "Arial, sans-serif";
-  text-align: center; /* Centers text */
-  display: flex;
-  flex-direction: column;
-  justify-content: center;
-  align-items: center;
 }
 
 .home-title {
@@ -62,8 +57,6 @@ body {
 .home-section ul {
   list-style-type: disc;
   padding-left: 20px;
-  text-align: left;
-  display: inline-block;
 }
 
 .code-block {
