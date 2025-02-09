@@ -1,81 +1,24 @@
-import React, { useReducer, createContext, useContext, Children } from "react";
-import "./App.css";
-
-const initialState = {
-  count: 0,
-};
-
-//Define the reducer function to handle state transitions
-const reducer = (state, action) => {
-  if (action.type === "INCREMENT") {
-    return {
-      ...state,
-      count: state.count + 1,
-    };
-  } else if (action.type === "DECREMENT") {
-    return {
-      ...state,
-      count: state.count - 1,
-    };
-  } else {
-    return state;
-  }
-};
-
-const CounterContext = createContext();
-const CounterProvider = ({ children }) => {
-  const [state, dispatch] = useReducer(reducer, initialState);
-  return (
-    <CounterContext.Provider value={{ state, dispatch }}>
-      {children}
-    </CounterContext.Provider>
-  );
-};
-
-const Counter = () => {
-  const { state, dispatch } = useContext(CounterContext);
-  return (
-    <div className="counter-container">
-      <h1>{state.count}</h1>
-      <button
-        className="button"
-        onClick={() => dispatch({ type: "INCREMENT" })}
-      >
-        +
-      </button>
-      <button
-        className="button"
-        onClick={() => dispatch({ type: "DECREMENT" })}
-      >
-        -
-      </button>
-    </div>
-  );
-};
-
-const Counter2 = () => {
-  const { state, dispatch } = useContext(CounterContext);
-  return (
-    <>
-      <h1 className="counter1">Counter 1 Component {state.count}</h1>
-      <button onClick={() => dispatch({ type: "INCREMENT" })}>Increment</button>
-      <button onClick={() => dispatch({ type: "DECREMENT" })}>Decrement</button>
-    </>
-  );
-};
+import React from "react";
+import { BrowserRouter, Routes, Route } from "react-router-dom";
+import Home from "./components/Home";
+import About from "./components/About";
+import Contact from "./components/Contact";
+import Posts from "./components/Posts";
+import PostDetails from "./components/PostDetails";
+import Navbar from "./components/Navbar";
 
 const App = () => {
   return (
-    <div className="app-container">
-      <h1 className="title">React Counter</h1>
-      <p className="sub-description">
-        A simple counter application using Use reducer and context api
-      </p>
-      <CounterProvider>
-        <Counter2 />
-        <Counter />
-      </CounterProvider>
-    </div>
+    <BrowserRouter>
+      <Navbar />
+      <Routes>
+        <Route path="/" element={<Home />} />
+        <Route path="/about" element={<About />} />
+        <Route path="/contact" element={<Contact />} />
+        <Route path="/posts" element={<Posts />} />
+        <Route path="/posts/:postId" element={<PostDetails />} />
+      </Routes>
+    </BrowserRouter>
   );
 };
 

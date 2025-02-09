@@ -1,0 +1,81 @@
+/* src/components/Contact.css */
+
+* {
+  font-family: sans-serif;
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+}
+
+html,
+body {
+  height: 100%;
+  background-color: black;
+}
+
+.contact-container {
+  max-width: 800px;
+  margin: 80px auto; /* Centers the container while keeping space for navbar */
+  padding: 100px;
+  background-color: black;
+  border-radius: 10px; /* Rounded corners */
+  box-shadow: 0 0 10px rgba(255, 255, 255, 0.3),
+    /* Outer glow */ 0 0 20px rgba(255, 255, 255, 0.2),
+    /* Medium glow */ 0 0 30px rgba(255, 255, 255, 0.1); /* Subtle deep glow */
+  border: 1px solid rgba(255, 255, 255, 0.2); /* Subtle border */
+  font-family: "Arial, sans-serif";
+}
+
+.contact-title {
+  font-size: 2.5rem;
+  color: #3578ea;
+  text-align: center;
+}
+
+.contact-content {
+  font-size: 1rem;
+  color: white;
+  line-height: 1.6;
+}
+
+.contact-section {
+  margin-bottom: 20px;
+}
+
+.contact-section h2 {
+  font-size: 1.5rem;
+  color: #b53ae1;
+  margin-bottom: 10px;
+}
+
+.contact-section ul {
+  list-style-type: none;
+  padding-left: 0;
+}
+
+.contact-section ul li {
+  margin-bottom: 10px;
+  color: white;
+}
+
+.social-media-list {
+  list-style-type: none;
+  margin-top: 20px;
+  padding-left: 0;
+  text-align: center;
+}
+
+.social-media-list li {
+  display: inline;
+  margin-right: 15px;
+}
+
+.social-media-list li a {
+  text-decoration: none;
+  color: #3578ea;
+  transition: color 0.3s;
+}
+
+.social-media-list li a:hover {
+  color: #b53ae1;
+}
